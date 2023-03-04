@@ -1,0 +1,174 @@
+.game {
+  width: 556px;
+  margin: 0 auto;
+  background-color: #c0c0c0;
+  border-top: 5px solid #fff;
+  border-left: 5px solid #fff;
+  border-right: 5px solid #7b7b7b;
+  border-bottom: 5px solid #7b7b7b;
+}
+
+.game__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  max-width: 100%;
+  height: 80px;
+  margin: 20px;
+  box-sizing: border-box;
+  border-top: 5px solid #7b7b7b;
+  border-left: 5px solid #7b7b7b;
+  border-right: 5px solid #fff;
+  border-bottom: 5px solid #fff;
+}
+
+.game__field {
+  margin: 20px;
+  font-size: 0;
+  box-sizing: border-box;
+  border-top: 5px solid #7b7b7b;
+  border-left: 5px solid #7b7b7b;
+  border-right: 5px solid #fff;
+  border-bottom: 5px solid #fff;
+}
+
+.icon {
+  display: inline-block;
+  width: 26px;
+  height: 48px;
+  background-image: url(../../images/minesweeper-sprites.png);
+  background-size: 280px;
+}
+
+.icon.icon-big-1 {
+  background-position: 0 0;  
+}
+
+.icon.icon-big-2 {
+  background-position: -28px 0;  
+}
+
+.icon.icon-big-3 {
+  background-position: -56px 0;  
+}
+
+.icon.icon-big-4 {
+  background-position: -84px 0;  
+}
+
+.icon.icon-big-5 {
+  background-position: -112px 0;  
+}
+
+.icon.icon-big-6 {
+  background-position: -140px 0;  
+}
+
+.icon.icon-big-7 {
+  background-position: -168px 0;  
+}
+
+.icon.icon-big-8 {
+  background-position: -196px 0;  
+}
+
+.icon.icon-big-9 {
+  background-position: -224px 0;  
+}
+
+.icon.icon-big-0 {
+  background-position: -252px 0;  
+}
+
+.icon.icon-smile {
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+}
+
+.icon.icon-smile_funny {  
+  background-position: 0 -50px; 
+}
+
+.icon.icon-smile_funny-pressed {  
+  background-position: 225px -50px; 
+}
+
+.icon.icon-smile_sad {
+  background-position: 60px -50px; 
+}
+
+.icon.icon-smile_stepp {
+  background-position: 115px -50px; 
+}
+
+.icon.icon-smile_afraid {
+  background-position: 170px -50px; 
+}
+
+.icon.icon-field {
+  width: 31.6px;
+  height: 27.6px;
+  cursor: pointer;
+}
+
+.icon.icon-field_close {
+  background-position: 0px 65px; 
+}
+
+.icon.icon-field_0 {
+  background-position: -35px 65px; 
+}
+
+.icon.icon-field_flag {
+  background-position: -68px 65px; 
+}
+
+.icon.icon-field_question {
+  background-position: -103px 65px; 
+}
+
+.icon.icon-field_-1 {
+  background-position: -172px 65px; 
+}
+
+.icon.icon-field_bang {
+  background-position: -206px 63px; 
+}
+
+.icon.icon-field_notbomb {
+  background-position: -240px 65px; 
+}
+
+.icon.icon-field_1 {
+  background-position: 0px 30px; 
+}
+
+.icon.icon-field_2 {
+  background-position: -35px 30px; 
+}
+
+.icon.icon-field_3 {
+  background-position: -70px 30px; 
+}
+
+.icon.icon-field_4 {
+  background-position: -105px 30px; 
+}
+
+.icon.icon-field_5 {
+  background-position: -138px 30px; 
+}
+
+.icon.icon-field_6 {
+  background-position: -173px 30px; 
+}
+
+.icon.icon-field_7 {
+  background-position: -208px 30px; 
+}
+
+.icon.icon-field_8 {
+  background-position: -241px 30px; 
+}

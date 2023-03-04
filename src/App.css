@@ -1,38 +1,28 @@
-.App {
-  text-align: center;
+@font-face {
+    font-family: 'mini-sweeper';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+    src:  url("../src/vendor/fonts/mine-sweeper.woff2") format("woff2"),
+          url("../src/vendor/fonts/mine-sweeper.woff") format("woff");
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.App {  
+  min-width: 560px;
   min-height: 100vh;
+  margin: 0 auto;
+  color: #fff;
+  font-family: "mini-sweeper", Arial, sans-serif;
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  align-items: center;
 }

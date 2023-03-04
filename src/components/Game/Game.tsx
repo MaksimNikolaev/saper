@@ -1,36 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import soundMine from "../../assets/boom.mp3";
 import soundClick from "../../assets/click.mp3";
+import { COUNT_MINE, Mask, MINE, SIZE } from '../../utils/constants';
 import { Counter } from '../Counter/Counter';
 import "./Game.css";
 
-export const Game = () => {
-  enum Mask {
-    Transparent,
-    Fill,
-    Flag,
-    Question,
-    Bang,
-    NotBomb,
-  }
-
-  const size = 16;
-  const Mine = -1;
-  const countMine = 40;
+export const Game = () => {  
   let coord: number;
   const [timer, setTimer] = useState<number>(0);
   const [gameStatus, setGameStatus] = useState<boolean>(false);
-  const [counterMin, setCounterMin] = useState<number>(countMine);
+  const [counterMin, setCounterMin] = useState<number>(COUNT_MINE);
   const [isFirstStep, setFirstStep] = useState<boolean>(true);
-  const [field, setField] = useState<number[]>(() => createField(size));
+  const [field, setField] = useState<number[]>(() => createField(SIZE));
   const [mask, setMask] = useState<Mask[]>(() =>
-    new Array(size * size).fill(Mask.Fill)
+    new Array(SIZE * SIZE).fill(Mask.Fill)
   );
   const [lose, setLose] = useState<boolean>(false);
   const [pressedButtonField, setPressedButtonField] = useState<boolean>(false);
   const [pressedButtonSmile, setPressedButtonSmile] = useState<boolean>(false);
-  const dimension = new Array(size).fill(0);
-  const win = checkVictory(mask, counterMin, size);
+  const clearing: [number, number][] = [];
+  const dimension = new Array(SIZE).fill(0);
+  const win = checkVictory(mask, counterMin, SIZE);
 
   const mapMaskToView: Record<Mask, React.ReactNode> = {
     [Mask.Transparent]: null,
@@ -69,28 +59,28 @@ export const Game = () => {
   function resetGame() {
     setGameStatus(false);
     setTimer(0);
-    setCounterMin(countMine);
+    setCounterMin(COUNT_MINE);
     setLose(false);
-    setField(createField(size));
-    setMask(new Array(size * size).fill(Mask.Fill));
+    setField(createField(SIZE));
+    setMask(new Array(SIZE * SIZE).fill(Mask.Fill));
     setFirstStep(true);
   }
 
-  function handleClickField(x: number, y: number) {
-    setGameStatus(true);
-    const clearing: [number, number][] = [];
-    function clear(x: number, y: number) {
-      if (x >= 0 && x < size && y >= 0 && y < size) {
-        if (mask[y * size + x] === Mask.Transparent) return;
-        clearing.push([x, y]);
-      }
+  function clear(x: number, y: number) {
+    if (x >= 0 && x < SIZE && y >= 0 && y < SIZE) {
+      if (mask[y * SIZE + x] === Mask.Transparent) return;
+      clearing.push([x, y]);
     }
-    if (mask[y * size + x] === Mask.Transparent) return;
+  }
+
+  function handleClickField(x: number, y: number) {
+    setGameStatus(true);  
+    if (mask[y * SIZE + x] === Mask.Transparent) return;
     clear(x, y);
     while (clearing.length) {
       const [x, y] = clearing.pop()!!;
-      mask[y * size + x] = Mask.Transparent;
-      if (field[y * size + x] !== 0) continue;
+      mask[y * SIZE + x] = Mask.Transparent;
+      if (field[y * SIZE + x] !== 0) continue;
       clear(x + 1, y);
       clear(x - 1, y);
       clear(x, y + 1);
@@ -105,18 +95,18 @@ export const Game = () => {
 
     function inc(x: number, y: number) {
       if (x >= 0 && x < size && y >= 0 && y < size) {
-        if (field[y * size + x] === Mine) return;
+        if (field[y * size + x] === MINE) return;
         field[y * size + x] += 1;
       }
     }
+
     for (let i = 0; i < counterMin; ) {
       const x = Math.floor(Math.random() * size);
       const y = Math.floor(Math.random() * size);
-      if (field[y * size + x] === Mine) continue;
+      if (field[y * size + x] === MINE) continue;
       if (y * size + x === coord) continue;
-      field[y * size + x] = Mine;
+      field[y * size + x] = MINE;
       i += 1;
-
       inc(x + 1, y);
       inc(x - 1, y);
       inc(x, y + 1);
@@ -167,11 +157,9 @@ export const Game = () => {
                           ? undefined
                           : isFirstStep
                           ? () => {
-                              coord = y * size + x;
-                              if (isFirstStep && field[coord] === Mine) {
-                                setField(createField(size));
-                                handleClickField(x, y);
-                                setFirstStep(false);
+                              coord = y * SIZE + x;
+                              if (isFirstStep && field[coord] === MINE) {
+                                setField(createField(SIZE));                                
                                 console.log("Поле обновилось");
                               }
                               setFirstStep(false);
@@ -179,10 +167,10 @@ export const Game = () => {
                             }
                           : () => {
                               handleClickField(x, y);
-                              if (field[y * size + x] === Mine) {
+                              if (field[y * SIZE + x] === MINE) {
                                 mask.forEach((_, i) => {
-                                  if (field[i] === Mine) {
-                                    mask[y * size + x] = Mask.Bang;
+                                  if (field[i] === MINE) {
+                                    mask[y * SIZE + x] = Mask.Bang;
                                     mask[i] = Mask.Transparent;
                                     new Audio(soundMine).play();
                                   }
@@ -202,16 +190,16 @@ export const Game = () => {
                               e.preventDefault();
                               e.stopPropagation();
                               setGameStatus(true);
-                              if (mask[y * size + x] === Mask.Transparent)
+                              if (mask[y * SIZE + x] === Mask.Transparent)
                                 return;
-                              if (mask[y * size + x] === Mask.Fill) {
-                                mask[y * size + x] = Mask.Flag;
+                              if (mask[y * SIZE + x] === Mask.Fill) {
+                                mask[y * SIZE + x] = Mask.Flag;
                                 setCounterMin(counterMin - 1);
-                              } else if (mask[y * size + x] === Mask.Flag) {
-                                mask[y * size + x] = Mask.Question;
+                              } else if (mask[y * SIZE + x] === Mask.Flag) {
+                                mask[y * SIZE + x] = Mask.Question;
                                 setCounterMin(counterMin + 1);
-                              } else if (mask[y * size + x] === Mask.Question) {
-                                mask[y * size + x] = Mask.Fill;
+                              } else if (mask[y * SIZE + x] === Mask.Question) {
+                                mask[y * SIZE + x] = Mask.Fill;
                               }
                               setMask((prev) => [...prev]);
                             }
@@ -224,9 +212,9 @@ export const Game = () => {
                       }
                       onMouseLeave={() => setPressedButtonField(false)}
                       className={`icon icon-field icon-field_${
-                        mask[y * size + x] !== Mask.Transparent
-                          ? mapMaskToView[mask[y * size + x]]
-                          : field[y * size + x]
+                        mask[y * SIZE + x] !== Mask.Transparent
+                          ? mapMaskToView[mask[y * SIZE + x]]
+                          : field[y * SIZE + x]
                       }`}
                     ></div>
                   );

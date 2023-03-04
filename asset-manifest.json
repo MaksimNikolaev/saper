@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/saper/static/css/main.d22e5767.css",
+    "main.js": "/saper/static/js/main.0650fcb7.js",
+    "static/js/787.cb2e3ed5.chunk.js": "/saper/static/js/787.cb2e3ed5.chunk.js",
+    "static/media/boom.mp3": "/saper/static/media/boom.19bf1b0305093967d845.mp3",
+    "static/media/click.mp3": "/saper/static/media/click.9f776e97fb460a2dada1.mp3",
+    "static/media/mine-sweeper.woff": "/saper/static/media/mine-sweeper.9dee0270546fb47c7bfb.woff",
+    "static/media/mine-sweeper.woff2": "/saper/static/media/mine-sweeper.a4fc26ca91c70e5a4bb2.woff2",
+    "index.html": "/saper/index.html",
+    "main.d22e5767.css.map": "/saper/static/css/main.d22e5767.css.map",
+    "main.0650fcb7.js.map": "/saper/static/js/main.0650fcb7.js.map",
+    "787.cb2e3ed5.chunk.js.map": "/saper/static/js/787.cb2e3ed5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d22e5767.css",
+    "static/js/main.0650fcb7.js"
+  ]
+}
